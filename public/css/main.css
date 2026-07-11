@@ -165,11 +165,14 @@ main li strong {
 
 footer {
     background: var(--primary);
-    color: white;
 
     text-align: center;
 
     padding: 1rem;
+}
+
+footer p {
+    color: white;
 }
 
 /* =========================
