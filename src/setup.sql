@@ -32,6 +32,7 @@ VALUES
 -- Verify the data insertion for the Organization Table
 SELECT * FROM organization;
 
+-- --------------------------------
 
 -- Create the Service Project Table
 CREATE TABLE service_project (
@@ -71,3 +72,92 @@ VALUES
 
 -- Verify the data insertion for the Service Project Table
 SELECT * FROM service_project;
+
+-- --------------------------------
+
+-- Create Service Project Category Table
+CREATE TABLE service_project_category (
+	category_id SERIAL PRIMARY KEY,
+	name VARCHAR(150) UNIQUE NOT NULL
+);
+
+-- Inserting into the Service Project Category Table
+INSERT INTO service_project_category (name)
+VALUES
+    ('Environment'),
+    ('Education'),
+    ('Community Outreach'),
+    ('Construction'),
+    ('Food Assistance');
+
+-- Verify the data insertion for the Service Project Category Table
+SELECT * FROM service_project_category;
+
+-- --------------------------------
+
+-- Create Service Project Has Category Table (Many-to-many Junction)
+CREATE TABLE service_project_has_category (
+	project_id INT NOT NULL,
+	category_id INT NOT NULL,
+	PRIMARY KEY (project_id, category_id),
+	FOREIGN KEY (project_id)
+		REFERENCES service_project(project_id)
+		ON DELETE CASCADE,
+	FOREIGN KEY (category_id)
+		REFERENCES service_project_category(category_id)
+		ON DELETE CASCADE
+);
+
+-- Inserting into the Service Project Has Category Table (Many-to-many Junction)
+INSERT INTO service_project_has_category (project_id, category_id)
+VALUES
+    -- BrightFuture Builders
+    (1, 1),  -- Park Cleanup -> Environment
+    (1, 3),  -- Park Cleanup -> Community Outreach
+
+    (2, 4),  -- Playground Restoration -> Construction
+    (2, 3),  -- Playground Restoration -> Community Outreach
+
+    (3, 4),  -- Community Center Renovation -> Construction
+    (3, 3),  -- Community Center Renovation -> Community Outreach
+
+    (4, 1),  -- Neighborhood Beautification -> Environment
+    (4, 3),  -- Neighborhood Beautification -> Community Outreach
+
+    (5, 4),  -- Accessibility Ramp Build -> Construction
+    (5, 3),  -- Accessibility Ramp Build -> Community Outreach
+
+    -- GreenHarvest Growers
+    (6, 1),  -- Community Garden Planting -> Environment
+    (6, 3),  -- Community Garden Planting -> Community Outreach
+    (6, 2),  -- Community Garden Planting -> Education
+
+    (7, 5),  -- Food Drive -> Food Assistance
+    (7, 3),  -- Food Drive -> Community Outreach
+
+    (8, 2),  -- Urban Farming Workshop -> Education
+    (8, 1),  -- Urban Farming Workshop -> Environment
+
+    (9, 1),  -- Tree Planting Day -> Environment
+    (9, 3),  -- Tree Planting Day -> Community Outreach
+
+    (10, 3), -- Farmers Market Volunteer -> Community Outreach
+    (10, 5), -- Farmers Market Volunteer -> Food Assistance
+
+    -- UnityServe Volunteers
+    (11, 2), -- Community Tutoring -> Education
+    (11, 3), -- Community Tutoring -> Community Outreach
+
+    (12, 3), -- Senior Center Visit -> Community Outreach
+
+    (13, 3), -- Health Fair Assistance -> Community Outreach
+    (13, 2), -- Health Fair Assistance -> Education
+
+    (14, 5), -- School Supply Drive -> Food Assistance
+    (14, 3), -- School Supply Drive -> Community Outreach
+
+    (15, 5), -- Holiday Meal Packaging -> Food Assistance
+    (15, 3); -- Holiday Meal Packaging -> Community Outreach
+
+-- Verify the data insertion for the Service Project Has Category Table
+SELECT * FROM service_project_has_category;
