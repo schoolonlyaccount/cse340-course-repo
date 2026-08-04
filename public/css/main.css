@@ -102,6 +102,10 @@ h2 {
     margin-bottom: 1rem;
 }
 
+h3 {
+    color: var(--primary-dark);
+}
+
 p {
     color: var(--text-light);
     margin-bottom: 1rem;

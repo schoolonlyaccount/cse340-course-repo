@@ -8,13 +8,6 @@
                 <%= projectDetails.title %>
             </h2>
 
-            <p>Associated Categories: <% categories.forEach(category=> { %><span>[<a
-                            href="/category/<%= category.category_id %>">
-                            <%= category.name %>
-                        </a>]</span>
-                    <% }); %>
-            </p>
-
             <p>Description: <%= projectDetails.description %>
             </p>
 
@@ -30,6 +23,15 @@
             <p>Organization: <a href="/organization/<%= projectDetails.organization_id %>">
                     <%= projectDetails.organization_name %>
                 </a></p>
+
+            <h3>Associated Categories:</h3>
+            <ul>
+                <% categories.forEach(category=> { %>
+                    <li><a href="/category/<%= category.category_id %>">
+                            <%= category.name %>
+                        </a></li>
+                    <% }) %>
+            </ul>
         </section>
     </main>
     <%- include('partials/footer') %>
