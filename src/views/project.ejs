@@ -8,6 +8,13 @@
                 <%= projectDetails.title %>
             </h2>
 
+            <p>Associated Categories: <% categories.forEach(category=> { %><span>[<a
+                            href="/category/<%= category.category_id %>">
+                            <%= category.name %>
+                        </a>]</span>
+                    <% }); %>
+            </p>
+
             <p>Description: <%= projectDetails.description %>
             </p>
 
