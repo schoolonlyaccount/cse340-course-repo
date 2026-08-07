@@ -72,7 +72,7 @@ const updateOrganization = async (id, name, description, contactEmail, logoFilen
     console.log('Updated organization with ID:', id);
   }
 
-  return result.rows[0].id;
+  return result.rows[0].organization_id;
 };
 
 export { getAllOrganizations, getOrganizationDetails, createOrganization, updateOrganization }
