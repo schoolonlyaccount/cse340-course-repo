@@ -247,6 +247,40 @@ button:active {
 }
 
 /* =========================
+   Form Checkbox
+========================= */
+
+.form-checkbox {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.form-checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.form-checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.form-checkbox-container label {
+    display: inline;
+    margin: 0;
+    font-weight: normal;
+    color: var(--text);
+    cursor: pointer;
+}
+
+/* =========================
    Organization Logos
 ========================= */
 
