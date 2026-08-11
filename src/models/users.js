@@ -2,14 +2,14 @@ import db from './db.js'
 import bcrypt from 'bcrypt';
 
 const createUser = async (name, email, passwordHash) => {
-    const default_role = 'user';
+    const defaultRole = 'user';
     const query = `
     INSERT INTO public.users (name, email, password_hash, role_id)
     VALUES ($1, $2, $3, (SELECT role_id FROM public.roles WHERE role_name = $4))
     RETURNING user_id;
     `;
 
-    const queryParams = [name, email, passwordHash, default_role];
+    const queryParams = [name, email, passwordHash, defaultRole];
     const result = await db.query(query, queryParams);
 
     if (result.rows.length === 0) {
@@ -63,4 +63,16 @@ const authenticateUser = async (email, password) => {
     return user;
 };
 
-export { createUser, authenticateUser };
+const getAllUsers = async () => {
+    const query = `
+    SELECT u.name, u.email, r.role_name AS their_role
+    FROM public.users u
+    JOIN public.roles r ON r.role_id = u.role_id;
+    `;
+
+    const result = await db.query(query);
+
+    return result.rows;
+}
+
+export { createUser, authenticateUser, getAllUsers };
