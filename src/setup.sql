@@ -161,3 +161,35 @@ VALUES
 
 -- Verify the data insertion for the Service Project Has Category Table
 SELECT * FROM service_project_has_category;
+
+-- --------------------------------
+
+-- Create the Roles Table
+CREATE TABLE roles (
+	role_id SERIAL PRIMARY KEY,
+	role_name VARCHAR(50) UNIQUE NOT NULL,
+	role_description TEXT
+);
+
+-- Inserting into the Roles Table
+INSERT INTO roles (role_name, role_description)
+VALUES
+	('user', 'Standard user with basic access'),
+	('admin', 'Administrator with full system access');
+
+-- Verify the data insertion for the Roles Table
+SELECT * FROM roles;
+
+-- --------------------------------
+
+-- Create the Users Table
+CREATE TABLE users (
+	user_id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	password_hash VARCHAR(255) NOT NULL,
+	role_id INTEGER,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+	FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
