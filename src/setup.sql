@@ -193,3 +193,18 @@ CREATE TABLE users (
 
 	FOREIGN KEY (role_id) REFERENCES roles(role_id)
 );
+
+-- --------------------------------
+
+-- Create the Project Has Volunteer Table
+CREATE TABLE project_has_volunteer (
+    project_id INT NOT NULL,
+    user_id INT NOT NULL,
+    PRIMARY KEY (project_id, user_id),
+    FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE
+);

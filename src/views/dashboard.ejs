@@ -13,5 +13,17 @@
         <% if (user && user.role_name==='admin' ) { %>
             <p><a href="/users">View all registered users</a></p>
             <% } %>
+
+        <h3>Volunteered Projects:</h3>
+        <ul>
+            <% volunteerProjects.forEach(project=> { %>
+                <li class="volunteer-project">
+                    <a href="/project/<%= project.project_id %>"><%= project.title %></a>
+                    <form class="volunteer" action="/dashboard/project/<%= project.project_id %>/unvolunteer" method="POST">
+                        <button type="submit">Remove Me as a Volunteer</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
     </main>
     <%- include('partials/footer') %>

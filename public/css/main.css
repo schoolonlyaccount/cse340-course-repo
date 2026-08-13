@@ -347,10 +347,25 @@ button:active {
 }
 
 /* =========================
+   Form Volunteer
+========================= */
+
+.volunteer-project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.volunteer-project form {
+    margin: 0;
+}
+
+/* =========================
    Form Checkbox
 ========================= */
 
-.form-checkbox {
+.form-checkbox, .volunteer {
     margin: 0;
     padding: 0.5rem;
 }
